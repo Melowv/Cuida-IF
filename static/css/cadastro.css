@@ -1,0 +1,29 @@
+/* Formatação Conteúdo da Tela */
+
+.content-screen {
+    animation: right 2s;
+}
+
+/* Formatação Registro */
+
+.register {
+    order: 1;
+    animation: right 2s;
+}
+
+.content-register {
+    margin-top: 40%;
+}
+
+/* Formatação Login para Cadastro */
+
+.cadastre {
+    order: 02;
+    animation: left 3s;
+}
+
+/* Formatação Âncora de Links */
+
+.anchor {
+    padding: 10px 40px;
+}

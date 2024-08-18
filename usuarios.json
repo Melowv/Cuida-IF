@@ -1,0 +1,16 @@
+{
+    "usuarios": [
+        {
+            "matricula": "202214610045",
+            "nome": "Davi",
+            "email": "davi@gmail.com",
+            "senha": "1234"
+        },
+        {
+            "matricula": "202214610020",
+            "nome": "Alanna",
+            "email": "aa@aa.com",
+            "senha": "1234"
+        }
+    ]
+}

@@ -1,0 +1,147 @@
+/* Formatações Gerais */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body, html {
+    height: 100%;
+    background: linear-gradient(#ffffff, #CBB4F6) no-repeat;
+}
+
+/* Logo */
+
+.navbar-brand {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+    animation: right 2s;
+}
+
+.navbar-brand img {
+    width: 5%;
+}
+
+/* Espaçamento da Tela e Formatações */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container h1 {
+   letter-spacing: 2px;
+   font-size: 40px;
+}
+
+/* Formatação Conteúdo da Tela */
+
+.content-screen {
+    background: #ffffff;
+    width: 75%;
+    height: 60%;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: right 2s;
+}
+
+/* Conteúdo Login */
+
+.login,
+.cadastre {
+    width: 50%;
+    text-align: center;
+    animation: login 2s;
+    margin: 5% auto;
+}
+
+/* Formatação dos Inputs */
+
+.login input,
+.cadastre input {
+    background: #d1d1d1;
+    border: none;
+    outline: none;
+    width: 80%;
+    padding: 3%;
+    border-radius: 10px;
+    margin-top: 15px;
+    letter-spacing: 2px;
+}
+
+/* Formatação do Botão*/
+
+.button {
+    margin-top: 5%;
+    border-radius: 10px;
+    padding: 2%;
+    width: 25%;
+    background: #A171FF;
+    border: none;
+}
+
+/* Formatação de Registro */
+
+.register {
+    background: linear-gradient(to right, #A171FF, #651ADF);
+    width: 35%;
+    height: 100%;
+    border-radius: 40px; 
+    animation: left 2s;
+    display: flex;
+    align-items: center;
+}
+
+/* Formatação da Âncora de Link */
+
+.anchor {
+    background: #ffffff;
+    color: #A171FF;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.anchor:hover {
+    color: #651ADF;
+    background: #e6e6e6;
+    transition: 1s;
+}
+
+/* Animações */
+
+@keyframes login {
+    from {
+        transform: translateX(-5%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes left {
+    from {
+        transform: translateX(10%);
+    }
+    
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes right {
+    from {
+        transform: translateX(-10%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
