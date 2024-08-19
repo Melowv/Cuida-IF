@@ -9,9 +9,8 @@ arquivo_usuarios = 'usuarios.json'
 
 # Função para carregar os usuários do arquivo JSON
 def carregar_usuarios():
-    if os.path.exists(arquivo_usuarios):
-        with open(arquivo_usuarios, 'r') as arquivo:
-            return json.load(arquivo)
+    with open(arquivo_usuarios, 'r') as arquivo:
+        return json.load(arquivo)
 
 # Função para salvar os usuários no arquivo JSON
 def salvar_usuarios(usuarios):

@@ -16,7 +16,7 @@
             <div class="login"> <!-- Aqui temos a Div Login que é a parte esquerda da Div Content-Screen, onde fica os conteúdos do Login -->
                 <h1>Login</h1> <!-- Título de Login -->
 
-                {% if mensagem %}
+                {% if mensagem %} <!-- Código python para chamar variável mensagem do flask -->
                     <script> window.alert("{{ mensagem }}");</script>
                 {% endif %}
                 
