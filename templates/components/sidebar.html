@@ -1,0 +1,16 @@
+<div class="sidebar"> <!-- Inicio Barra Lateral -->
+    <div class="brand">
+        <img src="/static/img/profile.png" alt="">
+        <p class="mb-0">Bem vindo (a), {{ nome }} </p>
+    </div>
+    <ul id="menu">
+        <li><a id="menu-home" href="{{ url_for('home') }}"><span class="icon"><i class="fas fa-home"></i></span> Início</a></li>
+        <li><a id="menu-profile" href="{{ url_for('perfil') }}"><span class="icon"><i class="fas fa-user"></i></span> Perfil</a></li>
+        <li><a id="menu-event" href="{{ url_for('eventos') }}"><span class="icon"><i class="fas fa-bullhorn"></i></span> Eventos</a></li>
+        <li><a id="menu-reviews" href="{{ url_for('avaliacoes') }}"><span class="icon"><i class="fas fa-clipboard"></i></span> Avaliações</a></li>
+    </ul>
+    <div class="bottom-text">
+        <img src="/static/img/logo.png" width="30px" alt="Logo">
+        <p class="d-inline text-light mb-0">Cuida +IF</p>
+    </div>
+</div> <!-- Fim Barra Lateral-->

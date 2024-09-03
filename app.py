@@ -1,7 +1,8 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, session
 import json
 
 app = Flask(__name__)
+app.config['SECRET_KEY'] = 'cuida+if'
 
 # Caminho para o arquivo JSON que armazena os usuários
 arquivo_usuarios = 'usuarios.json'
@@ -55,8 +56,11 @@ def registrar():
     return render_template('index.html', mensagem="Cadastro realizado com sucesso!")
 
 # Rota para processar o login
-@app.route('/login', methods=['POST'])
+@app.route('/', methods=['POST', 'GET'])
 def login():
+    if request.method == "GET":
+        render_template("index.html")
+
     matricula = request.form.get('matricula')
     senha = request.form.get('senha')
 
@@ -68,9 +72,57 @@ def login():
     # Verifica se as credenciais são válidas
     for usuario in usuarios['usuarios']:
         if usuario['matricula'] == matricula and usuario['senha'] == senha:
-            return render_template('inicio.html')
-
+            session['usuario_logado'] = usuario
+            return redirect(url_for('home'))
+        
     return render_template('index.html', mensagem="Usuário Inválido!")
+
+# Rotas Iniciais
+@app.route('/home')
+def home():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    nome_usuario = usuario_logado['nome']
+
+    return render_template('home.html', nome = nome_usuario)
+
+@app.route('/perfil')
+def perfil():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    nome_usuario = usuario_logado['nome']
+
+    return render_template('perfil.html', nome = nome_usuario)
+    
+@app.route('/eventos')
+def eventos():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    nome_usuario = usuario_logado['nome']
+
+    return render_template('eventos.html', nome = nome_usuario)
+    
+@app.route('/avaliacoes')
+def avaliacoes():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    nome_usuario = usuario_logado['nome']
+
+    return render_template('avaliacoes.html', nome = nome_usuario)
+
+# Rota para desconectar
+@app.route('/logout')
+def logout():
+    del session['usuario_logado']
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     app.run(debug=True)

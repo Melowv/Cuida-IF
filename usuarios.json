@@ -11,6 +11,12 @@
             "nome": "Alanna",
             "email": "aa@aa.com",
             "senha": "1234"
+        },
+        {
+            "matricula": "202214610046",
+            "nome": "qewqeqw",
+            "email": "das@sss.com",
+            "senha": "1234"
         }
     ]
 }
