@@ -11,6 +11,11 @@
         text-align: center;
     }
 
+    .reviews-header h2,
+    .events-header h2 {
+        font-size: 22px;
+    }
+
     /* Conteúdo Situação Corporal */
 
     .situation {
@@ -142,10 +147,10 @@
         background-color: #9965FF;
         width: 45%;
         height: 5vh;
-        line-height: 3.3;
+        line-height: 2.5;
         border-radius: 15px;
         margin: 2%;
-        font-size: 14px;
+        font-size: 18px;
         cursor: pointer;
         text-align: left;
         padding-left: 15px;
