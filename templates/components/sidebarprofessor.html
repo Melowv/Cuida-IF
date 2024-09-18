@@ -4,10 +4,10 @@
         <p class="mb-0">Bem vindo (a), {{ nome }} </p>
     </div>
     <ul id="menu">
-        <li><a id="menu-home" href=""><span class="icon"><i class="fas fa-home"></i></span> Início</a></li>
-        <li><a id="menu-profile" href=""><span class="icon"><i class="fas fa-user"></i></span> Perfil</a></li>
-        <li><a id="menu-event" href=""><span class="icon"><i class="fas fa-bullhorn"></i></span> Eventos</a></li>
-        <li><a id="menu-reviews" href=""><span class="icon"><i class="fas fa-clipboard"></i></span> Avaliações</a></li>
+        <li><a id="menu-home" href="{{ url_for('home_prof') }}"><span class="icon"><i class="fas fa-home"></i></span> Início</a></li>
+        <li><a id="menu-profile" href="{{ url_for('perfil_prof') }}"><span class="icon"><i class="fas fa-user"></i></span> Perfil</a></li>
+        <li><a id="menu-event" href="{{ url_for('eventos_prof') }}"><span class="icon"><i class="fas fa-bullhorn"></i></span> Eventos</a></li>
+        <li><a id="menu-reviews" href="{{ url_for('avaliacoes_prof') }}"><span class="icon"><i class="fas fa-clipboard"></i></span> Avaliações</a></li>
     </ul>
     <div class="bottom-text">
         <img src="/static/img/logo.png" width="30px" alt="Logo">

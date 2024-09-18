@@ -1,7 +1,7 @@
 <div class="sidebar"> <!-- Inicio Barra Lateral -->
     <div class="brand">
         <img src="/static/img/profile.png" alt="">
-        <p class="mb-0">Bem vindo (a), {{ nome }} </p>
+        <p class="mb-0">Bem vindo (a), {{ nome or 'Aluno' }} </p>
     </div>
     <ul id="menu">
         <li><a id="menu-home" href="{{ url_for('home') }}"><span class="icon"><i class="fas fa-home"></i></span> Início</a></li>

@@ -11,14 +11,10 @@
     animation: right 2s;
 }
 
-.content-register {
-    margin-top: 40%;
-}
-
 /* Formatação Login para Cadastro */
 
 .cadastre {
-    order: 02;
+    order: 2;
     animation: left 3s;
 }
 

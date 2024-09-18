@@ -1,17 +1,130 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/static/img/logo.png" type="image/x-icon">
     <title>Perfil</title>
     <link rel="stylesheet" href="/static/css/sidebar.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/css/perfil.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2a6282eefd.js" crossorigin="anonymous"></script>
 </head>
 <body id="profile">
-    <div class="content">
-        {% include "components/sidebar.html" %}
-    </div>
+    {% include "components/smalldevices.html" %}
+    <form action="" method="POST">
+        <div class="content">
+            {% include "components/sidebaraluno.html" %}
+            <div class="flex-container">
+                
+                <div class="col-left"> <!-- Inicio Coluna Esquerda -->
+                    <div class="inserir-foto">
+                        <div class="foto">
+                            <p>Inserir Foto</p>
+                        </div>
+                    </div>
+                    <div class="info-left">
+                        <label class="titulo" for="altura">Altura:</label>
+                        <input id="altura" name="altura" type="text" value="{{ usuario['altura'] }}">
+                    </div>
+                    <div class="info-left">
+                        <label class="titulo" for="peso">Peso:</label>
+                        <input id="peso" name="peso" type="text" value="{{ usuario['peso'] }}">
+                    </div>
+                    <div class="info-left">
+                        <label class="titulo" for="pressao">Pressão Arterial:</label>
+                        <input id="pressao" name="pressao" type="text" required="required" value="{{ usuario['pressao'] }}">
+                    </div>
+                    <div class="info-left">
+                        <p class="titulo">Plano de Saúde:</p>
+                        <select name="plano_saude">
+                            <option value="sim" {{ 'selected' if usuario.get('plano_saude', 'nao') == 'sim' else '' }}>Sim</option>
+                            <option value="nao" {{ 'selected' if usuario.get('plano_saude', 'nao') == 'nao' else '' }}>Não</option>
+                        </select>                        
+                    </div>
+                </div> <!-- Fim da Coluna Esquerda-->
+
+                <!-- Coluna Direita - Informações Pessoais -->
+                <div class="col-right">
+                    <div class="primary-box mt-0">
+                        <label for="nome">Nome:</label>
+                        <input id="nome" name="nome" type="text" required="required" value="{{ usuario['nome'] }}">
+                    </div>
+                    
+                    <div class="second">
+                        <div class="second-box">
+                            <label for="data-nascimento">Data de Nascimento:</label>
+                            <input id="data-nascimento" name="data_nascimento" type="date" required="required" value="{{ usuario['data_nascimento'] }}">
+                        </div>
+                        <div class="second-box">
+                            <p>Turmas:</p>
+                            <select name="turma"> <!-- Obs: Está como se fosse errado, mas é apenas leitura do vscode -->
+                                <option value="1° A" {{ 'selected' if usuario.get('turma') == '1° A' else '' }}>1° A</option>
+                                <option value="1° B" {{ 'selected' if usuario.get('turma') == '1° B' else '' }}>1° B</option>
+                                <option value="2° A" {{ 'selected' if usuario.get('turma') == '2° A' else '' }}>2° A</option>
+                                <option value="2° B" {{ 'selected' if usuario.get('turma') == '2° B' else '' }}>2° B</option>
+                                <option value="3°" {{ 'selected' if usuario.get('turma') == '3°' else '' }}>3°</option>
+                            </select>                            
+                        </div>
+                        <div class="second-box">
+                            <label for="matricula">Matrícula:</label>
+                            <input id="matricula" name="matricula" type="text" value="{{ usuario['matricula'] }}" required="required" readonly>
+                        </div>
+                        <div class="second-box mb-2">
+                            <p>Curso:</p>
+                            <select name="curso">
+                                <option value="Informática" {{ 'selected' if usuario.get('curso', '') == 'Informática' else '' }}>Informática</option>
+                                <option value="Meio Ambiente" {{ 'selected' if usuario.get('curso', '') == 'Meio Ambiente' else '' }}>Meio Ambiente</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="primary-box mt-4">
+                        <label for="email">Email Acadêmico:</label>
+                        <input id="email" name="email" type="email" required="required" value="{{ usuario['email'] }}">
+                    </div>
+
+                    <div class="second">
+                        <div class="second-box">
+                            <label for="cidade">Cidade:</label>
+                            <input id="cidade" name="cidade" type="text" required="required" value="{{ usuario['cidade'] }}">
+                        </div>
+                        <div class="second-box">
+                            <label for="cep">CEP:</label>
+                            <input id="cep" name="cep" type="text" required="required" value="{{ usuario['cep'] }}">
+                        </div>
+                        <div class="second-box">
+                            <label for="bairro">Bairro:</label>
+                            <input id="bairro" name="bairro" type="text" required="required" value="{{ usuario['bairro'] }}">
+                        </div>
+                        <div class="second-box">
+                            <label for="estado">Estado:</label>
+                            <input id="estado" name="estado" type="text" required="required" value="{{ usuario['estado'] }}">
+                        </div>
+                    </div>
+                    
+                    <div class="primary-box mt-3">
+                        <label for="rua">Rua:</label>
+                        <input id="rua" name="rua" type="text" required="required" value="{{ usuario['rua'] }}">
+                    </div>
+
+                    <div class="second-box">
+                        <p>Gênero:</p>
+                        <select name="genero">
+                            <option value="masculino" {{ 'selected' if usuario.get('genero') == 'masculino' else '' }}>Masculino</option>
+                            <option value="feminino" {{ 'selected' if usuario.get('genero') == 'feminino' else '' }}>Feminino</option>
+                            <option value="nao_binario" {{ 'selected' if usuario.get('genero') == 'nao_binario' else '' }}>Não Binário</option>
+                            <option value="outro" {{ 'selected' if usuario.get('genero') == 'outro' else '' }}>Outro</option>
+                        </select>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button type="button" class="btn btn-dark">Editar</button>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
 </body>
 </html>

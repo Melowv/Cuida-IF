@@ -11,8 +11,9 @@
     <script src="https://kit.fontawesome.com/2a6282eefd.js" crossorigin="anonymous"></script>
 </head>
 <body id="home">
+    {% include "components/smalldevices.html" %}
     <div class="content"> <!-- Inicio Div Content -->
-        {% include "components/sidebar.html" %}
+        {% include "components/sidebaraluno.html" %}
         
         <div class="situation"> <!-- Inicio Div Situation -->
             <div class="picture-profile">
@@ -20,12 +21,12 @@
             </div>
             <div class="body-status">
                 <h2 class="formated-text mt-3">Situação Corporal</h2>
-                <h3 class="sub-title mt-2">Altura: 1.57m</h3>
-                <h3 class="sub-title">Peso: 57Kg</h3>
-                <h3 class="sub-title mb-4">Pressão Arterial: 120/80</h3>
+                <h3 class="sub-title mt-2">Altura: {{ altura }}m</h3>
+                <h3 class="sub-title">Peso: {{ peso }}Kg</h3>
+                <h3 class="sub-title mb-4">Pressão Arterial: {{ pressao }}</h3>
             </div>
             <div class="body-imc">
-                <h3 class="sub-title mb-0">Resultado IMC: 23.12</h3>
+                <h3 class="sub-title mb-0">Resultado IMC: {{ imc }}</h3>
             </div>
             <div class="section-table">
                 <h2 class="formated-text">Confira a Tabela</h2>

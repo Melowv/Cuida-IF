@@ -115,3 +115,24 @@ body, html {
         transform: translateX(0);
     }
 }
+
+/* Mobile Devices */
+
+@media (max-width: 767.98px) {
+    .mobile-devices {
+        height: 100%;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 10%;
+    }
+
+    .mobile-devices h1 {
+        font-weight: 400;
+    }
+    
+    .content {
+        display: none;
+    }
+}

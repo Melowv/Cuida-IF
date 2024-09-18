@@ -1,0 +1,119 @@
+/* Container Principal */
+
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+    background-color: #8349F4;;
+    border-radius: 30px;
+    width: 65vw;
+    height: 90vh;
+    margin-left: 1%;
+   
+}
+
+/* Coluna Lateral */
+
+.col-left {
+    width: 15vw;
+    padding: 2%;
+}
+
+.info-left { 
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3%;
+    margin: 7% 0;
+    background-color: #9965FF;
+    color: white;
+    width: 13vw;
+    height: 7vh;
+    border-radius: 15px;
+}
+
+/* Área da Foto */
+
+.inserir-foto {
+    width: 250px;
+    height: 250px;
+    border-radius: 30px;
+    background-color: #9965FF;
+    box-shadow: 0px 4px 8px #0000001a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.inserir-foto .foto p {
+    font-size: 16px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
+}
+
+/* Coluna Direita */
+
+.col-right {
+    padding: 2%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 30px;
+    width: 50vw;
+}
+
+.primary-box {
+    background-color: #9965FF;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3%;
+    width: 100%;
+    height: 7vh;
+    border-radius: 15px;
+}
+.second {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.second-box {
+    background-color: #9965FF;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 3%;
+    width: 49%;
+    margin-top: 2%;
+    height: 7vh;
+    border-radius: 15px;
+}
+
+/* Input e Select */
+
+input,
+select {
+    color: #8349F4;
+    width: 40%;
+    border-radius: 5px;
+    text-align: end;
+    border: none;
+    outline: none;
+}
+
+
+.action-buttons {
+    height: 100%;
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.action-buttons button {
+    margin-left: 2%;
+}
