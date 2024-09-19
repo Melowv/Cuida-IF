@@ -147,7 +147,8 @@ def salvar_perfil():
     usuario_logado['peso'] = perfil_data['peso']
     usuario_logado['pressao'] = perfil_data['pressao']
 
-    session['usuario_logado'] = usuario_logado  # Atualizando a sessão
+    usuario_logado.update(perfil_data)
+    session['usuario_logado'] = usuario_logado
 
     return redirect(url_for('perfil'))
 
@@ -160,17 +161,18 @@ def home():
 
     usuario_logado = session.get('usuario_logado')
 
-    # Pegar as informações do usuário logado a partir da sessão
-    altura = float(usuario_logado.get('altura', 0))
-    peso = float(usuario_logado.get('peso', 0))      
+    altura = usuario_logado.get('altura', '') or 'N/A'
+    peso = usuario_logado.get('peso', '') or 'N/A'
     pressao = usuario_logado.get('pressao', 'N/A')
 
-    # Calcular o IMC
-    imc = round(peso / (altura ** 2), 2) if altura > 0 else 'N/A'
+    try:
+        altura_float = float(altura)
+        peso_float = float(peso)
+        imc = round(peso_float / (altura_float ** 2), 2) if altura_float > 0 else 'N/A'
+    except ValueError:
+        imc = 'N/A'
 
-    # Renderizar a página home com as informações
     return render_template('student/home.html', altura=altura, peso=peso, pressao=pressao, imc=imc, nome=usuario_logado['nome'])
-
 
 @app.route('/perfil')
 def perfil():

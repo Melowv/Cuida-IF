@@ -21,10 +21,10 @@
         },
         {
             "matricula": "202214610045",
-            "nome": "Davi",
+            "nome": "Davi Melo",
             "email": "davi@acam.com",
             "senha": "1234",
-            "altura": "1.70",
+            "altura": "10.70",
             "peso": "60",
             "pressao": "120/80",
             "plano_saude": "sim",
@@ -56,6 +56,44 @@
             "estado": "Paraiba",
             "rua": "Rua barra de Santa Rosa",
             "genero": "nao_binario"
+        },
+        {
+            "matricula": "202214610031",
+            "nome": "sss",
+            "email": "qqq@qqq.com",
+            "senha": "1234",
+            "altura": "1.57m",
+            "peso": "60",
+            "pressao": "100/80",
+            "plano_saude": "sim",
+            "data_nascimento": "2024-09-25",
+            "turma": "3\u00b0",
+            "curso": "Inform\u00e1tica",
+            "cidade": "wwwwwww",
+            "cep": "wwwwwww",
+            "bairro": "www",
+            "estado": "www",
+            "rua": "www",
+            "genero": "masculino"
+        },
+        {
+            "matricula": "2020",
+            "nome": "Seu la",
+            "email": "asa@gmail.com",
+            "senha": "1234",
+            "altura": "1.70",
+            "peso": "70",
+            "pressao": "120/80",
+            "plano_saude": "sim",
+            "data_nascimento": "2024-09-05",
+            "turma": "1\u00b0 A",
+            "curso": "Inform\u00e1tica",
+            "cidade": "Santa Rita",
+            "cep": "58098",
+            "bairro": "Tibiri",
+            "estado": "Paraiba",
+            "rua": "Rua barra de Santa Rosa",
+            "genero": "masculino"
         }
     ]
 }
