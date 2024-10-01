@@ -17,7 +17,7 @@
         
         <div class="situation"> <!-- Inicio Div Situation -->
             <div class="picture-profile">
-                <img src="/static/img/profile.png" alt="Imagem de perfil">
+                <img src="{{ url_for('static', filename='fotos_perfil/' + usuario['foto_perfil']) if usuario['foto_perfil'] else '/static/img/profile.png' }}" alt="Imagem de perfil">
             </div>
             <div class="body-status">
                 <h2 class="formated-text mt-3">Situação Corporal</h2>
@@ -75,7 +75,6 @@
                 <div class="reviews-header">
                     <i class="fa-solid fa-bell"></i>
                     <h2 class="d-inline formated-text mt-3">Avaliações</h2>
-                    <a href=" {{url_for('logout')}} "><i class="fa-solid fa-x text-decoration-none text-light"></i></a>
                 </div>
                 <div class="text-light">
                     <div class="buttons"><i class="fa-solid fa-plus"></i><span>Anamnese</span></div>

@@ -12,7 +12,7 @@
 </head>
 <body id="profile">
     {% include "components/smalldevices.html" %}
-    <form action="" method="POST">
+    <form action="" method="POST" enctype="multipart/form-data">
         <div class="content">
             {% include "components/sidebaraluno.html" %}
             <div class="flex-container">
@@ -20,9 +20,12 @@
                 <div class="col-left"> <!-- Inicio Coluna Esquerda -->
                     <div class="inserir-foto">
                         <div class="foto">
-                            <p>Inserir Foto</p>
+                            <!-- Exibir a imagem de perfil, se existir -->
+                            <img id="preview" class="text-white" src="{{ url_for('static', filename='fotos_perfil/' + (usuario.get('foto_perfil') or 'profile.png')) }}" max-width="150" max-height="150" alt="Foto de perfil" style="display: block;">
+                            <label for="foto_perfil">Escolher Arquivo</label>
+                            <input id="foto_perfil" name="foto_perfil" type="file" accept="image/*">
                         </div>
-                    </div>
+                    </div>                           
                     <div class="info-left">
                         <label class="titulo" for="altura">Altura:</label>
                         <input id="altura" name="altura" type="text" value="{{ usuario['altura'] }}">
@@ -38,8 +41,8 @@
                     <div class="info-left">
                         <p class="titulo">Plano de Saúde:</p>
                         <select name="plano_saude">
-                            <option value="sim" {{ 'selected' if usuario.get('plano_saude', 'nao') == 'sim' else '' }}>Sim</option>
-                            <option value="nao" {{ 'selected' if usuario.get('plano_saude', 'nao') == 'nao' else '' }}>Não</option>
+                            <option value="sim" {{ 'selected' if usuario.get('plano_saude') == 'sim' else '' }}>Sim</option>
+                            <option value="nao" {{ 'selected' if usuario.get('plano_saude') == 'nao' else '' }}>Não</option>
                         </select>                        
                     </div>
                 </div> <!-- Fim da Coluna Esquerda-->
@@ -57,7 +60,7 @@
                             <input id="data-nascimento" name="data_nascimento" type="date" required="required" value="{{ usuario['data_nascimento'] }}">
                         </div>
                         <div class="second-box">
-                            <p>Turmas:</p>
+                            <p class="mb-0">Turmas:</p>
                             <select name="turma"> <!-- Obs: Está como se fosse errado, mas é apenas leitura do vscode -->
                                 <option value="1° A" {{ 'selected' if usuario.get('turma') == '1° A' else '' }}>1° A</option>
                                 <option value="1° B" {{ 'selected' if usuario.get('turma') == '1° B' else '' }}>1° B</option>
@@ -71,7 +74,7 @@
                             <input id="matricula" name="matricula" type="text" value="{{ usuario['matricula'] }}" required="required" readonly>
                         </div>
                         <div class="second-box mb-2">
-                            <p>Curso:</p>
+                            <p class="mb-0">Curso:</p>
                             <select name="curso">
                                 <option value="Informática" {{ 'selected' if usuario.get('curso', '') == 'Informática' else '' }}>Informática</option>
                                 <option value="Meio Ambiente" {{ 'selected' if usuario.get('curso', '') == 'Meio Ambiente' else '' }}>Meio Ambiente</option>
@@ -109,7 +112,7 @@
                     </div>
 
                     <div class="second-box">
-                        <p>Gênero:</p>
+                        <p class="mb-0">Gênero:</p>
                         <select name="genero">
                             <option value="masculino" {{ 'selected' if usuario.get('genero') == 'masculino' else '' }}>Masculino</option>
                             <option value="feminino" {{ 'selected' if usuario.get('genero') == 'feminino' else '' }}>Feminino</option>
@@ -126,5 +129,6 @@
             </div>
         </div>
     </form>
+    <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
 </body>
 </html>

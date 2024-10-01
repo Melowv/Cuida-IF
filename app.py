@@ -1,5 +1,8 @@
 from flask import Flask, request, render_template, redirect, url_for, session
 import json
+from secrets import token_hex
+from PIL import Image
+import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cuida+if'
@@ -74,13 +77,8 @@ def login():
     matricula = request.form.get('matricula')
     senha = request.form.get('senha')
 
-    if matricula == "20201461" and senha == "1234":
-        session['usuario_logado'] = {'nome': 'Ellen', 'matricula': matricula}
-        return redirect(url_for('home_prof'))
-
-    usuarios = carregar_usuarios()
-
     # Verifica se as credenciais são válidas
+    usuarios = carregar_usuarios()
     for usuario in usuarios['usuarios']:
         if usuario['matricula'] == matricula and usuario['senha'] == senha:
             session['usuario_logado'] = usuario
@@ -88,23 +86,83 @@ def login():
 
     return render_template('/start/index.html', mensagem="Usuário Inválido!")
 
-# Rota para exibir perfil do usuário
-@app.route('/perfil', methods=['GET'])
-def exibir_perfil():
+# Rotas Iniciais dos Alunos
+@app.route('/home')
+def home():
     if not session.get('usuario_logado'):
         return redirect(url_for('index'))
 
     usuario_logado = session.get('usuario_logado')
-    
-    # Carrega os dados do JSON
-    usuarios = carregar_usuarios()
 
-    # Busca o perfil do usuário logado
-    for usuario in usuarios['usuarios']:
-        if usuario['matricula'] == usuario_logado['matricula']:
-            return render_template('/student/perfil.html', usuario=usuario)
-    
-    return redirect(url_for('home'))
+    altura = usuario_logado.get('altura', '') or 'N/A'
+    peso = usuario_logado.get('peso', '') or 'N/A'
+    pressao = usuario_logado.get('pressao', 'N/A')
+
+    try:
+        altura_float = float(altura)
+        peso_float = float(peso)
+        imc = round(peso_float / (altura_float ** 2), 2) if altura_float > 0 else 'N/A'
+    except ValueError:
+        imc = 'N/A'
+
+    return render_template('student/home.html', altura=altura, peso=peso, pressao=pressao, imc=imc, nome=usuario_logado['nome'], usuario=usuario_logado)
+
+@app.route('/perfil')
+def perfil():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    return render_template('/student/perfil.html', usuario=usuario_logado)
+
+@app.route('/eventos')
+def eventos():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    return render_template('/student/eventos.html', usuario=usuario_logado)
+
+@app.route('/avaliacoes')
+def avaliacoes():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    return render_template('/student/avaliacoes.html', usuario=usuario_logado)
+
+# Rotas Iniciais do Professor
+@app.route('/home_prof')
+def home_prof():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    return render_template('/teachers/home_prof.html', usuario=usuario_logado)
+
+@app.route('/perfil_prof')
+def perfil_prof():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    return render_template('/teachers/perfil_prof.html', usuario=usuario_logado)
+
+@app.route('/eventos_prof')
+def eventos_prof():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    return render_template('/teachers/eventos_prof.html', usuario=usuario_logado)
+
+@app.route('/avaliacoes_prof')
+def avaliacoes_prof():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    usuario_logado = session.get('usuario_logado')
+    return render_template('/teachers/avaliacoes_prof.html', usuario=usuario_logado)
 
 # Rota para salvar informações do perfil
 @app.route('/perfil', methods=['POST'])
@@ -131,9 +189,14 @@ def salvar_perfil():
         "genero": request.form.get('genero')
     }
 
-    usuarios = carregar_usuarios()
+    # Verifica se uma nova foto foi enviada
+    if 'foto_perfil' in request.files:
+        imagem = request.files['foto_perfil']
+        if imagem and imagem.filename != '':
+            nome_arquivo_imagem = salvar_imagem(imagem)
+            perfil_data['foto_perfil'] = nome_arquivo_imagem
 
-    # Atualiza o perfil do usuário logado no arquivo JSON
+    usuarios = carregar_usuarios()
     for usuario in usuarios['usuarios']:
         if usuario['matricula'] == perfil_data['matricula']:
             usuario.update(perfil_data)
@@ -141,113 +204,39 @@ def salvar_perfil():
 
     salvar_usuarios(usuarios)
 
-    # Atualiza a sessão com os novos dados
+    # Atualiza a sessão com os dados mais recentes
     usuario_logado = session['usuario_logado']
-    usuario_logado['altura'] = perfil_data['altura']
-    usuario_logado['peso'] = perfil_data['peso']
-    usuario_logado['pressao'] = perfil_data['pressao']
-
     usuario_logado.update(perfil_data)
     session['usuario_logado'] = usuario_logado
 
     return redirect(url_for('perfil'))
 
-# Rotas Iniciais
 
-@app.route('/home')
-def home():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
+# Função para salvar a imagem
+def salvar_imagem(imagem):
+    codigo = token_hex(8)
+    nome, extensao = os.path.splitext(imagem.filename)
+    nome_arquivo = nome + codigo + extensao
+    caminho = os.path.join(app.root_path, "static/fotos_perfil", nome_arquivo)
 
-    usuario_logado = session.get('usuario_logado')
+    imagem_original = Image.open(imagem)
 
-    altura = usuario_logado.get('altura', '') or 'N/A'
-    peso = usuario_logado.get('peso', '') or 'N/A'
-    pressao = usuario_logado.get('pressao', 'N/A')
+    largura, altura = imagem_original.size
+    if largura > altura:
+        diferenca = (largura - altura) // 2
+        box = (diferenca, 0, largura - diferenca, altura)
+    else:
+        diferenca = (altura - largura) // 2
+        box = (0, diferenca, largura, altura - diferenca)
 
-    try:
-        altura_float = float(altura)
-        peso_float = float(peso)
-        imc = round(peso_float / (altura_float ** 2), 2) if altura_float > 0 else 'N/A'
-    except ValueError:
-        imc = 'N/A'
+    imagem_quadrada = imagem_original.crop(box)
+    tamanho = (200, 200)
+    imagem_quadrada.thumbnail(tamanho)
+    imagem_quadrada.save(caminho)
 
-    return render_template('student/home.html', altura=altura, peso=peso, pressao=pressao, imc=imc, nome=usuario_logado['nome'])
-
-@app.route('/perfil')
-def perfil():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
-
-    usuario_logado = session.get('usuario_logado')
-    nome_usuario = usuario_logado['nome']
-
-    return render_template('/student/perfil.html', nome = nome_usuario, usuario = usuario_logado)
-    
-@app.route('/eventos')
-def eventos():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
-
-    usuario_logado = session.get('usuario_logado')
-    nome_usuario = usuario_logado['nome']
-
-    return render_template('/student/eventos.html', nome = nome_usuario)
-    
-@app.route('/avaliacoes')
-def avaliacoes():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
-
-    usuario_logado = session.get('usuario_logado')
-    nome_usuario = usuario_logado['nome']
-
-    return render_template('/student/avaliacoes.html', nome = nome_usuario)
-
-# Rotas Professor
-
-@app.route('/home_prof')
-def home_prof():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
-
-    usuario_logado = session.get('usuario_logado')
-    nome_usuario = usuario_logado['nome']
-
-    return render_template('/teachers/home_prof.html', nome = nome_usuario)
-
-@app.route('/perfil_prof')
-def perfil_prof():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
-
-    usuario_logado = session.get('usuario_logado')
-    nome_usuario = usuario_logado['nome']
-
-    return render_template('/teachers/perfil_prof.html', nome = nome_usuario)
-
-@app.route('/eventos_prof')
-def eventos_prof():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
-
-    usuario_logado = session.get('usuario_logado')
-    nome_usuario = usuario_logado['nome']
-
-    return render_template('/teachers/eventos_prof.html', nome = nome_usuario)
-
-@app.route('/avaliacoes_prof')
-def avaliacoes_prof():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
-
-    usuario_logado = session.get('usuario_logado')
-    nome_usuario = usuario_logado['nome']
-
-    return render_template('/teachers/avaliacoes_prof.html', nome = nome_usuario)
+    return nome_arquivo
 
 # Rota para desconectar
-
 @app.route('/logout')
 def logout():
     del session['usuario_logado']

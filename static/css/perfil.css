@@ -6,10 +6,9 @@
     box-sizing: border-box;
     background-color: #8349F4;;
     border-radius: 30px;
-    width: 65vw;
+    width: 64vw;
     height: 90vh;
     margin-left: 1%;
-   
 }
 
 /* Coluna Lateral */
@@ -42,14 +41,37 @@
     box-shadow: 0px 4px 8px #0000001a;
     display: flex;
     align-items: center;
-    justify-content: center;
+    text-align: center;
 }
 
-.inserir-foto .foto p {
-    font-size: 16px;
+.inserir-foto .foto  {
+    width: 100%;
+}
+
+.inserir-foto .foto img {
+    margin: auto;
+    width: 170px;
+    height: 170px;
+    border-radius: 15px;
+}
+
+.inserir-foto .foto input {
+    display: none;
+}
+
+.inserir-foto .foto label {
+    margin-top: 5%;
     color: #ffffff;
-    text-align: center;
-    font-size: 30px;
+    background-color: #8349F4;
+    padding: 5px 15px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.5s;
+}
+
+.inserir-foto .foto label:hover {
+    color: #8349F4;
+    background-color: #ffffff;
 }
 
 /* Coluna Direita */
@@ -116,4 +138,8 @@ select {
 
 .action-buttons button {
     margin-left: 2%;
+}
+
+.titulo {
+    margin-bottom: 0;
 }

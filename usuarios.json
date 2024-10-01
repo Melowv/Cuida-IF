@@ -24,7 +24,7 @@
             "nome": "Davi Melo",
             "email": "davi@acam.com",
             "senha": "1234",
-            "altura": "10.70",
+            "altura": "1.70",
             "peso": "60",
             "pressao": "120/80",
             "plano_saude": "sim",
@@ -36,7 +36,8 @@
             "bairro": "dd",
             "estado": "dd",
             "rua": "dd",
-            "genero": "masculino"
+            "genero": "masculino",
+            "foto_perfil": "WhatsApp Image 2023-12-12 at 22.05.55a9fff1ec6cebf2f6.jpeg"
         },
         {
             "matricula": "202214610030",
