@@ -2,7 +2,7 @@
     <div class="brand">
         <img src="{{ url_for('static', filename='fotos_perfil/' + usuario['foto_perfil']) if usuario['foto_perfil'] else '/static/img/profile.png' }}" 
              alt="Foto de perfil" class="rounded-circle" width="50" id="profile-icon" style="cursor: pointer;">
-        <p class="mb-0">Bem vindo (a), {{ usuario['nome'] or 'Aluno' }} </p>
+        <p class="mb-0">Bem vindo (a), {{ usuario['nome'] }} </p>
     </div>
     
     <div class="perfil-expanded" id="perfil-expanded" style="display: none;">
@@ -25,15 +25,5 @@
         <img src="/static/img/logo.png" width="30px" alt="Logo">
         <p class="d-inline text-light mb-0">Cuida +IF</p>
     </div>
+    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
 </div> <!-- Fim Barra Lateral -->
-
-<script>
-    document.getElementById("profile-icon").onclick = function() {
-        var perfilExpanded = document.getElementById("perfil-expanded");
-        if (perfilExpanded.style.display === "none" || perfilExpanded.style.display === "") {
-            perfilExpanded.style.display = "block";
-        } else {
-            perfilExpanded.style.display = "none";
-        }
-    };
-</script>

@@ -1,10 +1,12 @@
-/* Visualizar Turmas */
-
 /* Formatações Gerais */
 
 .situation {
     padding: 1%;
     width: 30vw;
+}
+
+.sidebar {
+    width: 16vw !important;
 }
 
 .title-view h2 {
@@ -89,4 +91,8 @@ table td:last-child {
 .reviews,
 .events {
     width: 35vw;
+}
+
+.reviews-header h2 {
+    margin-left: 30%;
 }

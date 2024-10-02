@@ -1,3 +1,4 @@
+# Importações
 from flask import Flask, request, render_template, redirect, url_for, session
 import json
 from secrets import token_hex
@@ -6,29 +7,52 @@ import os
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'cuida+if'
-
-# Caminho para o arquivo JSON que armazena os usuários
 arquivo_usuarios = 'usuarios.json'
 
-# Função para carregar os usuários do arquivo JSON
+# Funções Iniciais para Carregar os Usuários do Json e Salvar os Usuários
 def carregar_usuarios():
     with open(arquivo_usuarios, 'r') as arquivo:
         return json.load(arquivo)
 
-# Função para salvar os usuários no arquivo JSON
 def salvar_usuarios(usuarios):
     with open(arquivo_usuarios, 'w') as arquivo:
         json.dump(usuarios, arquivo, indent=4)
 
-# Rota para a página inicial (login)
+# Rotas Iniciais (Login e Cadastro)
 @app.route('/')
 def index():
     return render_template('/start/index.html')
 
-# Rota para a página de cadastro
 @app.route('/cadastro')
 def cadastro():
     return render_template('/start/cadastro.html')
+
+# Rota para processar o login
+@app.route('/', methods=['POST', 'GET'])
+def login():
+    if request.method == "GET":
+        return render_template("/start/index.html")
+
+    matricula = request.form.get('matricula')
+    senha = request.form.get('senha')
+
+    usuarios = carregar_usuarios()
+
+    # Verificar se o usuário é um aluno
+    for aluno in usuarios['alunos']:
+        if aluno['matricula'] == matricula and aluno['senha'] == senha:
+            session['usuario_logado'] = aluno
+            session['tipo_usuario'] = 'aluno'  # Adiciona tipo de usuário
+            return redirect(url_for('home'))
+
+    # Verificar se o usuário é uma professora
+    for professora in usuarios['professoras']:
+        if professora['matricula'] == matricula and professora['senha'] == senha:
+            session['usuario_logado'] = professora
+            session['tipo_usuario'] = 'professora'  # Adiciona tipo de usuário
+            return redirect(url_for('home_prof'))
+
+    return render_template('/start/index.html', mensagem="Usuário Inválido!")
 
 # Rota para processar o cadastro
 @app.route('/cadastro', methods=['POST'])
@@ -40,12 +64,12 @@ def registrar():
 
     usuarios = carregar_usuarios()
 
-    for usuario in usuarios['usuarios']:
-        if usuario['matricula'] == matricula:
+    for aluno in usuarios['alunos']:
+        if aluno['matricula'] == matricula:
             return render_template('/start/cadastro.html', mensagem="Matrícula já existe!")
 
-    # Adicionar usuário com dados básicos
-    usuarios['usuarios'].append({
+    # Adiciona Aluno
+    usuarios['alunos'].append({
         "matricula": matricula,
         "nome": nome,
         "email": email,
@@ -67,24 +91,6 @@ def registrar():
 
     salvar_usuarios(usuarios)
     return redirect(url_for('index'))
-
-# Rota para processar o login
-@app.route('/', methods=['POST', 'GET'])
-def login():
-    if request.method == "GET":
-        return render_template("/start/index.html")
-
-    matricula = request.form.get('matricula')
-    senha = request.form.get('senha')
-
-    # Verifica se as credenciais são válidas
-    usuarios = carregar_usuarios()
-    for usuario in usuarios['usuarios']:
-        if usuario['matricula'] == matricula and usuario['senha'] == senha:
-            session['usuario_logado'] = usuario
-            return redirect(url_for('home'))
-
-    return render_template('/start/index.html', mensagem="Usuário Inválido!")
 
 # Rotas Iniciais dos Alunos
 @app.route('/home')
@@ -131,6 +137,125 @@ def avaliacoes():
     usuario_logado = session.get('usuario_logado')
     return render_template('/student/avaliacoes.html', usuario=usuario_logado)
 
+# Rota para salvar informações do perfil do aluno
+@app.route('/perfil', methods=['POST'])
+def salvar_perfil():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    perfil_data = {
+        "matricula": request.form.get('matricula'),
+        "nome": request.form.get('nome'),
+        "altura": request.form.get('altura'),
+        "peso": request.form.get('peso'),
+        "pressao": request.form.get('pressao'),
+        "plano_saude": request.form.get('plano_saude'),
+        "data_nascimento": request.form.get('data_nascimento'),
+        "turma": request.form.get('turma'),
+        "curso": request.form.get('curso'),
+        "email": request.form.get('email'),
+        "cidade": request.form.get('cidade'),
+        "cep": request.form.get('cep'),
+        "bairro": request.form.get('bairro'),
+        "estado": request.form.get('estado'),
+        "rua": request.form.get('rua'),
+        "genero": request.form.get('genero')
+    }
+
+    mensagem = None  # Variável para armazenar a mensagem de erro
+    # Verifica se uma nova foto foi enviada
+    if 'foto_perfil' in request.files:
+        imagem = request.files['foto_perfil']
+        if imagem and imagem.filename != '':
+            nome_arquivo_imagem = salvar_imagem(imagem)
+            if nome_arquivo_imagem:  # Se a imagem foi salva com sucesso
+                perfil_data['foto_perfil'] = nome_arquivo_imagem
+            else:
+                mensagem = "Formato de imagem não permitido. Utilize JPEG ou PNG."  # Armazena a mensagem de erro
+
+    usuarios = carregar_usuarios()
+    for usuario in usuarios['alunos']:
+        if usuario['matricula'] == perfil_data['matricula']:
+            usuario.update(perfil_data)
+            break
+
+    salvar_usuarios(usuarios)
+
+    usuario_logado = session['usuario_logado']
+    usuario_logado.update(perfil_data)
+    session['usuario_logado'] = usuario_logado
+
+    return render_template('/student/perfil.html', usuario=usuario_logado, mensagem=mensagem)
+
+# Rota para salvar informações do perfil da professora
+@app.route('/perfil_prof', methods=['POST'])
+def salvar_perfil_prof():
+    if not session.get('usuario_logado'):
+        return redirect(url_for('index'))
+
+    perfil_data = {
+        "matricula": request.form.get('matricula'),
+        "nome": request.form.get('nome'),
+        "data_nascimento": request.form.get('data_nascimento'),
+        "email": request.form.get('email'),
+        "genero": request.form.get('genero'),
+    }
+
+    mensagem = None  # Variável para armazenar a mensagem de erro
+    # Verifica se uma nova foto foi enviada
+    if 'foto_perfil' in request.files:
+        imagem = request.files['foto_perfil']
+        if imagem and imagem.filename != '':
+            nome_arquivo_imagem = salvar_imagem(imagem)
+            if nome_arquivo_imagem:  # Se a imagem foi salva com sucesso
+                perfil_data['foto_perfil'] = nome_arquivo_imagem
+            else:
+                mensagem = "Formato de imagem não permitido. Utilize JPEG ou PNG."  # Armazena a mensagem de erro
+
+    usuarios = carregar_usuarios()
+    for usuario in usuarios['professoras']:
+        if usuario['matricula'] == perfil_data['matricula']:
+            usuario.update(perfil_data)
+            break
+
+    salvar_usuarios(usuarios)
+
+    usuario_logado = session['usuario_logado']
+    usuario_logado.update(perfil_data)
+    session['usuario_logado'] = usuario_logado
+
+    return render_template('/teachers/perfil_prof.html', usuario=usuario_logado, mensagem=mensagem)
+
+# Função para salvar a imagem
+def salvar_imagem(imagem):
+    extensao = os.path.splitext(imagem.filename)[1].lower()
+
+    if extensao not in ['.jpeg', '.jpg', '.png']:
+        return None 
+
+    codigo = token_hex(8)
+    nome, _ = os.path.splitext(imagem.filename)  # Ignora a extensão para criar o nome
+    nome_arquivo = nome + codigo + extensao
+    caminho = os.path.join(app.root_path, "static/fotos_perfil", nome_arquivo)
+
+    imagem_original = Image.open(imagem)
+
+    largura, altura = imagem_original.size
+    if largura > altura:
+        diferenca = (largura - altura) // 2
+        box = (diferenca, 0, largura - diferenca, altura)
+    else:
+        diferenca = (altura - largura) // 2
+        box = (0, diferenca, largura, altura - diferenca)
+
+    imagem_quadrada = imagem_original.crop(box)
+    tamanho = (200, 200)
+    imagem_quadrada.thumbnail(tamanho)
+    imagem_quadrada.save(caminho)
+
+    return nome_arquivo
+
+
 # Rotas Iniciais do Professor
 @app.route('/home_prof')
 def home_prof():
@@ -164,83 +289,11 @@ def avaliacoes_prof():
     usuario_logado = session.get('usuario_logado')
     return render_template('/teachers/avaliacoes_prof.html', usuario=usuario_logado)
 
-# Rota para salvar informações do perfil
-@app.route('/perfil', methods=['POST'])
-def salvar_perfil():
-    if not session.get('usuario_logado'):
-        return redirect(url_for('index'))
-
-    perfil_data = {
-        "matricula": request.form.get('matricula'),
-        "nome": request.form.get('nome'),
-        "altura": request.form.get('altura'),
-        "peso": request.form.get('peso'),
-        "pressao": request.form.get('pressao'),
-        "plano_saude": request.form.get('plano_saude'),
-        "data_nascimento": request.form.get('data_nascimento'),
-        "turma": request.form.get('turma'),
-        "curso": request.form.get('curso'),
-        "email": request.form.get('email'),
-        "cidade": request.form.get('cidade'),
-        "cep": request.form.get('cep'),
-        "bairro": request.form.get('bairro'),
-        "estado": request.form.get('estado'),
-        "rua": request.form.get('rua'),
-        "genero": request.form.get('genero')
-    }
-
-    # Verifica se uma nova foto foi enviada
-    if 'foto_perfil' in request.files:
-        imagem = request.files['foto_perfil']
-        if imagem and imagem.filename != '':
-            nome_arquivo_imagem = salvar_imagem(imagem)
-            perfil_data['foto_perfil'] = nome_arquivo_imagem
-
-    usuarios = carregar_usuarios()
-    for usuario in usuarios['usuarios']:
-        if usuario['matricula'] == perfil_data['matricula']:
-            usuario.update(perfil_data)
-            break
-
-    salvar_usuarios(usuarios)
-
-    # Atualiza a sessão com os dados mais recentes
-    usuario_logado = session['usuario_logado']
-    usuario_logado.update(perfil_data)
-    session['usuario_logado'] = usuario_logado
-
-    return redirect(url_for('perfil'))
-
-
-# Função para salvar a imagem
-def salvar_imagem(imagem):
-    codigo = token_hex(8)
-    nome, extensao = os.path.splitext(imagem.filename)
-    nome_arquivo = nome + codigo + extensao
-    caminho = os.path.join(app.root_path, "static/fotos_perfil", nome_arquivo)
-
-    imagem_original = Image.open(imagem)
-
-    largura, altura = imagem_original.size
-    if largura > altura:
-        diferenca = (largura - altura) // 2
-        box = (diferenca, 0, largura - diferenca, altura)
-    else:
-        diferenca = (altura - largura) // 2
-        box = (0, diferenca, largura, altura - diferenca)
-
-    imagem_quadrada = imagem_original.crop(box)
-    tamanho = (200, 200)
-    imagem_quadrada.thumbnail(tamanho)
-    imagem_quadrada.save(caminho)
-
-    return nome_arquivo
-
-# Rota para desconectar
+# Rota para sair da sessão
 @app.route('/logout')
 def logout():
-    del session['usuario_logado']
+    session.pop('usuario_logado', None)
     return redirect(url_for('index'))
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     app.run(debug=True)
