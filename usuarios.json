@@ -8,10 +8,10 @@
             "pressao": "120/80",
             "plano_saude": "sim",
             "data_nascimento": "2024-09-04",
-            "turma": "1\u00b0 A",
-            "curso": "Inform\u00e1tica",
+            "turma": "2° B",
+            "curso": "Meio Ambiente",
             "email": "davi@acam.com",
-            "cidade": "S\u00c3\u00a3o Paulo",
+            "cidade": "São Paulo",
             "cep": "01001-000",
             "bairro": "Centro",
             "estado": "SP",
@@ -30,15 +30,15 @@
             "pressao": "120/80",
             "plano_saude": "sim",
             "data_nascimento": "2007-03-03",
-            "turma": "3\u00b0",
-            "curso": "Inform\u00e1tica",
+            "turma": "3°",
+            "curso": "Informática",
             "cidade": "Santa Rita",
             "cep": "58000-000",
             "bairro": "Tibiri",
             "estado": "Paraiba",
             "rua": "Rua Bessa",
             "genero": "masculino",
-            "foto_perfil": "C\u00e9ub1ee7c5fec5d1883.jpg"
+            "foto_perfil": "Céub1ee7c5fec5d1883.jpg"
         }
     ],
     "professoras": [

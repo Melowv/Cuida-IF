@@ -1,24 +1,18 @@
 <div class="sidebar"> <!-- Inicio Barra Lateral -->
     <div class="brand">
         <img src="{{ url_for('static', filename='fotos_perfil/' + usuario['foto_perfil']) if usuario['foto_perfil'] else '/static/img/profile.png' }}" 
-             alt="Foto de perfil" class="rounded-circle" width="50" id="profile-icon" style="cursor: pointer;">
+             alt="Foto de perfil" class="rounded-circle" width="50" id="profile-icon">
         <p class="mb-0">Bem vindo (a), {{ usuario['nome'] }} </p>
     </div>
-    
-    <div class="perfil-expanded" id="perfil-expanded" style="display: none;">
-        <a href="{{ url_for('logout') }}">
-            <div>
-                <i class="fa-solid fa-right-from-bracket"></i>
-                <p class="mb-0"> Sair </p>
-            </div>
-        </a>
-    </div>
+
     <ul id="menu">
         <li><a id="menu-home" href="{{ url_for('home_prof') }}"><span class="icon"><i class="fas fa-home"></i></span> Início</a></li>
         <li><a id="menu-profile" href="{{ url_for('perfil_prof') }}"><span class="icon"><i class="fas fa-user"></i></span> Perfil</a></li>
         <li><a id="menu-event" href="{{ url_for('eventos_prof') }}"><span class="icon"><i class="fas fa-bullhorn"></i></span> Eventos</a></li>
         <li><a id="menu-reviews" href="{{ url_for('avaliacoes_prof') }}"><span class="icon"><i class="fas fa-clipboard"></i></span> Avaliações</a></li>
+        <li><a id="menu-reviews" href="{{ url_for('logout') }}"><span class="icon"><i class="fa-solid fa-arrow-right-from-bracket"></i></span> Sair</a></li>
     </ul>
+    
     <div class="bottom-text">
         <img src="/static/img/logo.png" width="30px" alt="Logo">
         <p class="d-inline text-light mb-0">Cuida +IF</p>

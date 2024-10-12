@@ -15,8 +15,8 @@ def carregar_usuarios():
         return json.load(arquivo)
 
 def salvar_usuarios(usuarios):
-    with open(arquivo_usuarios, 'w') as arquivo:
-        json.dump(usuarios, arquivo, indent=4)
+    with open(arquivo_usuarios, 'w', encoding='utf-8') as arquivo:
+        json.dump(usuarios, arquivo, indent=4, ensure_ascii=False)
 
 # Rotas Iniciais (Login e Cadastro)
 @app.route('/')
@@ -255,6 +255,20 @@ def salvar_imagem(imagem):
 
     return nome_arquivo
 
+# Rota apara pegar turma
+
+def pegar_turmas_cursos():
+    usuarios = carregar_usuarios()
+    lista_turmas_cursos = []
+
+    for aluno in usuarios['alunos']:
+        turma = aluno.get('turma')
+        curso = aluno.get('curso')
+        
+        if turma and curso:
+            lista_turmas_cursos.append((turma, curso))
+
+    return lista_turmas_cursos
 
 # Rotas Iniciais do Professor
 @app.route('/home_prof')

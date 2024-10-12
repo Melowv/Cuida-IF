@@ -123,7 +123,7 @@ select {
     color: #8349F4;
     width: 40%;
     border-radius: 5px;
-    text-align: end;
+    text-align: start;
     border: none;
     outline: none;
 }

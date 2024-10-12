@@ -50,12 +50,6 @@ body, html {
     height: 40px;
     border-radius: 100%;
     margin-right: 5%;
-    opacity: 1;
-    transition: all 0.5s;
-}
-
-.sidebar .brand img:hover {
-    opacity: 0.8;
 }
 
 /* Barra de Navegação */
@@ -133,34 +127,3 @@ body, html {
     }
 }
 
-/* Perfil expanded */
-
-.perfil-expanded {
-    background-color: #363636;
-    display: none;
-    color: white;
-    border-radius: 10px;
-    width: 100px;
-    position: absolute;
-    left: 12%;
-    top: 13%;
-    padding: 9px;
-    font-size: 15px;
-}
-
-.perfil-expanded a {
-    text-decoration: none;
-    color: white;
-}
-
-.perfil-expanded div {
-    display: flex;
-    padding: 5px 10px;
-    cursor: pointer; 
-}
-
-.perfil-expanded i {
-    margin-right: 10px;
-    height: auto;
-    width: 18px;
-}
