@@ -31,7 +31,7 @@
     border: none;
     outline: none;
     justify-content: space-around;
-    width: 90px;
+    width: 80px;
     margin: 15px 2px;  
     padding: 10px 12px;      
 }
@@ -39,7 +39,7 @@
 .classes-button:hover {
     background-color:#35068e;
     color:#ffffff;
-    transition: 2s ease-in-out;
+    transition: 0.5s ease-in-out;
 }
 
 .classes-students {
@@ -51,6 +51,8 @@
     height: 35%;
     padding: 20px;
     margin: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
 }
 
 table {
@@ -71,7 +73,6 @@ table th, table td {
 table th {
     font-size: 1em;
     text-transform: uppercase;
-    border-bottom: 1px solid #ffffff;
     margin-top: 0;
     font-size: 12px;
 }
@@ -86,6 +87,10 @@ table td:last-child {
     cursor: pointer;
 }
 
+.title-header {
+    border-bottom: 1px solid #ffffff;
+}
+
 /* Configurações dos Containers */
 
 .reviews,
@@ -95,4 +100,8 @@ table td:last-child {
 
 .reviews-header h2 {
     margin-left: 30%;
+}
+
+.events {
+    height: 55.5vh;
 }

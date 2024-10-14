@@ -1,5 +1,5 @@
 # Importações
-from flask import Flask, request, render_template, redirect, url_for, session
+from flask import Flask, request, render_template, redirect, url_for, session, jsonify
 import json
 from secrets import token_hex
 from PIL import Image
@@ -255,29 +255,64 @@ def salvar_imagem(imagem):
 
     return nome_arquivo
 
-# Rota apara pegar turma
-
+# Rota apara pegar turma e pegar usuários
 def pegar_turmas_cursos():
     usuarios = carregar_usuarios()
-    lista_turmas_cursos = []
+    turmas_cursos = {}
 
     for aluno in usuarios['alunos']:
         turma = aluno.get('turma')
         curso = aluno.get('curso')
-        
-        if turma and curso:
-            lista_turmas_cursos.append((turma, curso))
+        nome = aluno.get('nome')
 
-    return lista_turmas_cursos
+        if turma and curso:
+            chave = f"{turma} - {curso}"
+            if chave not in turmas_cursos:
+                turmas_cursos[chave] = []
+            turmas_cursos[chave].append(nome)
+
+    return turmas_cursos
+    
+def pegar_todos_usuarios():
+    try:
+        with open("usuarios.json", 'r', encoding="utf-8") as arquivo:
+            usuarios = json.load(arquivo)
+    except FileNotFoundError:
+        usuarios = []
+    return usuarios
+
 
 # Rotas Iniciais do Professor
-@app.route('/home_prof')
+@app.route('/home_prof', methods=["POST", "GET"])
 def home_prof():
     if not session.get('usuario_logado'):
         return redirect(url_for('index'))
 
-    usuario_logado = session.get('usuario_logado')
-    return render_template('/teachers/home_prof.html', usuario=usuario_logado)
+    if request.method == "POST":
+        if request.is_json:  # Verifica se é uma requisição AJAX
+            data = request.json
+            turma = data.get("turma")
+            curso = data.get("curso")
+
+            # Pegando todos os usuários
+            usuarios = pegar_todos_usuarios()
+
+            # Filtrando os alunos da turma e curso
+            usuarios_turma = [
+                usuario for usuario in usuarios["alunos"]
+                if usuario["curso"] == curso and usuario["turma"] == turma
+            ]
+
+            # Retorna os dados como JSON
+            return jsonify(usuarios_turma=usuarios_turma)
+
+        return redirect(url_for('home_prof'))
+
+    else:
+        usuario_logado = session.get('usuario_logado')
+        turmas_cursos = pegar_turmas_cursos()  # Função que carrega turmas e cursos
+
+        return render_template('/teachers/home_prof.html', usuario=usuario_logado, turmas_cursos=turmas_cursos)
 
 @app.route('/perfil_prof')
 def perfil_prof():
