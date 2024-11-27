@@ -1,21 +1,31 @@
 /* Container Principal */
 
+.limited-flex {
+    height: 100%;
+}
+
 .flex-container {
     display: flex;
+    align-items: center;
     flex-direction: row;
     box-sizing: border-box;
     background-color: #8349F4;;
     border-radius: 30px;
     width: 64vw;
-    height: 90vh;
-    margin-left: 1%;
+    height: 100%;
+    min-height: 800px;
+    margin-left: 0.5vh;
 }
 
 /* Coluna Lateral */
 
 .col-left {
-    width: 15vw;
+    width: 16vw;
     padding: 2%;
+}
+
+.info-left-main {
+    margin-bottom: -2vh;
 }
 
 .info-left { 
@@ -23,25 +33,27 @@
     align-items: center;
     justify-content: space-between;
     padding: 3%;
-    margin: 7% 0;
+    margin: 2vh 0;
     background-color: #9965FF;
     color: white;
-    width: 13vw;
-    height: 7vh;
+    min-width: 14vw;
+    min-height: 6vh;
     border-radius: 15px;
 }
 
 /* Área da Foto */
 
 .inserir-foto {
-    width: 250px;
-    height: 250px;
+    margin: 1vh;
+    max-width: 250px;
+    min-height: 200px;
     border-radius: 30px;
     background-color: #9965FF;
     box-shadow: 0px 4px 8px #0000001a;
     display: flex;
     align-items: center;
     text-align: center;
+    margin-bottom: 5vh;
 }
 
 .inserir-foto .foto  {
@@ -49,9 +61,10 @@
 }
 
 .inserir-foto .foto img {
-    margin: auto;
-    width: 170px;
-    height: 170px;
+    margin: 2vh auto;
+    margin-bottom: 1vh;
+    max-width: 10vw;
+    max-height: 10vw;
     border-radius: 15px;
 }
 
@@ -60,7 +73,7 @@
 }
 
 .inserir-foto .foto label {
-    margin-top: 5%;
+    margin-bottom: 1vh;
     color: #ffffff;
     background-color: #8349F4;
     padding: 5px 15px;
@@ -92,8 +105,8 @@
     align-items: center;
     justify-content: space-between;
     padding: 3%;
-    width: 100%;
-    height: 7vh;
+    min-width: 14vw;
+    max-height: 6vh;
     border-radius: 15px;
 }
 .second {
@@ -111,8 +124,8 @@
     justify-content: space-between;
     padding: 3%;
     width: 49%;
-    margin-top: 2%;
-    height: 7vh;
+    margin-top: 2vh;
+    max-height: 6vh;
     border-radius: 15px;
 }
 
@@ -128,6 +141,11 @@ select {
     outline: none;
 }
 
+input:disabled, input:read-only, select:disabled {
+    background-color: #cab6f0;
+    cursor: not-allowed;
+}
+
 
 .action-buttons {
     height: 100%;
@@ -137,7 +155,8 @@ select {
 }
 
 .action-buttons button {
-    margin-left: 2%;
+    margin-top: -4vh;
+    margin-left: 1vh;
 }
 
 .titulo {

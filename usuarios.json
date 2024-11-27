@@ -8,7 +8,7 @@
             "pressao": "120/80",
             "plano_saude": "sim",
             "data_nascimento": "2024-09-04",
-            "turma": "2° B",
+            "turma": "1° A",
             "curso": "Meio Ambiente",
             "email": "davi@acam.com",
             "cidade": "São Paulo",
@@ -35,7 +35,7 @@
             "cidade": "Santa Rita",
             "cep": "58000-000",
             "bairro": "Tibiri",
-            "estado": "Paraiba",
+            "estado": "Paraíba",
             "rua": "Rua Bessa",
             "genero": "masculino",
             "foto_perfil": "Céub1ee7c5fec5d1883.jpg"
@@ -77,8 +77,7 @@
             "estado": "sla",
             "rua": "sla",
             "genero": "feminino"
-        }
-        ,
+        },
         {
             "matricula": "127345",
             "nome": "roblox",

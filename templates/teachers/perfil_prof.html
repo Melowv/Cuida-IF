@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,71 +12,77 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://kit.fontawesome.com/2a6282eefd.js" crossorigin="anonymous"></script>
 </head>
-
 <body id="profile">
-    {% if mensagem %}
-        <script> window.alert("{{ mensagem }}");</script>
-    {% endif %}
     {% include "components/smalldevices.html" %}
     <form action="{{ url_for('salvar_perfil_prof') }}" method="POST" enctype="multipart/form-data">
         <div class="content">
             {% include "components/sidebarprofessor.html" %}
-            <div class="flex-container">
-                <div class="col-left"> <!-- Inicio Coluna Esquerda -->
-                    <div class="inserir-foto">
-                        <div class="foto">
-                            <!-- Exibir a imagem de perfil, se existir -->
-                            <img id="preview" class="text-white"
-                                src="{{ url_for('static', filename='fotos_perfil/' + (usuario.get('foto_perfil') or 'profile.png')) }}"
-                                max-width="150" max-height="150" alt="Foto de perfil" style="display: block;">
-                            <label for="foto_perfil">Escolher Arquivo</label>
-                            <input id="foto_perfil" name="foto_perfil" type="file" accept="image/*">
+            <div class="limited-flex">
+                <div class="flex-container">
+                    <div class="col-left"> <!-- Inicio Coluna Esquerda -->
+                        <div class="inserir-foto" style="margin-top: -20vh;">
+                            <div class="foto">
+                                <!-- Exibir a imagem de perfil, se existir -->
+                                <img id="preview" class="text-white" src="{{ url_for('static', filename='fotos_perfil/' + (usuario.get('foto_perfil') or 'profile.png')) }}" max-width="150" max-height="150" alt="Foto de perfil" style="display: block;">
+                                <label for="foto_perfil">Escolher Arquivo</label>
+                                <input id="foto_perfil" name="foto_perfil" type="file" accept="image/*">
+                            </div>
                         </div>
-                    </div>
-                </div> <!--fim da coluna esquerda!-->
-                <!-- Coluna Direita - Informações Pessoais -->
-                <div class="col-right">
-                    <div class="primary-box mt-0">
-                        <label for="nome">Nome:</label>
-                        <input id="nome" name="nome" type="text" required="required" value="{{ usuario['nome'] }}">
-                    </div>
-                    <div class="second">
-                        <div class="second-box">
-                            <label for="data-nascimento">Data de Nascimento:</label>
-                            <input id="data-nascimento" name="data_nascimento" type="date" required="required"
-                                value="{{ usuario['data_nascimento'] }}">
+                    </div> <!--fim da coluna esquerda!-->
+                    <!-- Coluna Direita - Informações Pessoais -->
+                    <div class="col-right">
+                        <div class="primary-box mt-0">
+                            <label for="nome">Nome:</label>
+                            <input id="nome" name="nome" type="text" required="required" value="{{ usuario['nome'] }}" disabled>
                         </div>
-                        <div class="second-box">
-                            <label for="matricula">Matrícula:</label>
-                            <input id="matricula" name="matricula" type="text" value="{{ usuario['matricula'] }}"
-                                required="required" readonly>
-                        </div>
-                        <div class="primary-box mt-4">
-                            <label for="email">Email Acadêmico:</label>
-                            <input id="email" name="email" type="email" required="required"
-                                value="{{ usuario['email'] }}">
-                        </div>
-                        <div class="second-box">
-                            <p class="mb-0">Gênero:</p>
-                            <select name="genero">
-                                <option value="masculino" {{ 'selected' if usuario.get('genero')=='masculino' else ''
-                                    }}>Masculino</option>
-                                <option value="feminino" {{ 'selected' if usuario.get('genero')=='feminino' else '' }}>
-                                    Feminino</option>
-                                <option value="nao_binario" {{ 'selected' if usuario.get('genero')=='nao_binario'
-                                    else '' }}>Não Binário</option>
-                                <option value="outro" {{ 'selected' if usuario.get('genero')=='outro' else '' }}>Outro
-                                </option>
-                            </select>
-                        </div>
-                        <div class="action-buttons">
-                            <button type="button" class="btn btn-dark">Editar</button>
-                            <button type="submit" class="btn btn-success">Salvar</button>
+                        <div class="second">
+                            <div class="second-box">
+                                <label for="data-nascimento">Data de Nascimento:</label>
+                                <input id="data-nascimento" name="data_nascimento" type="date" required="required" value="{{ usuario['data_nascimento'] }}" disabled>
+                            </div>
+                            <div class="second-box">
+                                <label for="matricula">Matrícula:</label>
+                                <input id="matricula" name="matricula" type="text" value="{{ usuario['matricula'] }}" required="required" readonly>
+                            </div>
+                            <div class="primary-box mt-4">
+                                <label for="email">Email Acadêmico:</label>
+                                <input id="email" name="email" type="email" required="required" value="{{ usuario['email'] }}" disabled>
+                            </div>
+                            <div class="second-box">
+                                <p class="mb-0">Gênero:</p>
+                                <select name="genero" disabled>
+                                    <option value="masculino" {{ 'selected' if usuario.get('genero')=='masculino' else '' }} >Masculino</option>
+                                    <option value="feminino" {{ 'selected' if usuario.get('genero')=='feminino' else '' }}> Feminino</option>
+                                    <option value="nao_binario" {{ 'selected' if usuario.get('genero')=='nao_binario' else '' }}>Não Binário</option>
+                                    <option value="outro" {{ 'selected' if usuario.get('genero')=='outro' else '' }}>Outro</option> 
+                                </select>
+                            </div>
+                            <div class="action-buttons">
+                                <button type="button" class="btn btn-dark btn-edit">Editar</button>
+                                <button type="submit" class="btn btn-success btn-save">Salvar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
     </form>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editButton = document.querySelector('.btn-edit');
+            const saveButton = document.querySelector('.btn-save');
+            const inputs = document.querySelectorAll('input, select'); // Campos de entrada
+    
+            saveButton.disabled = true;
+    
+    
+            editButton.addEventListener('click', () => {
+                inputs.forEach(input => input.disabled = false);
+                saveButton.disabled = false;
+            });
+        });
+    </script>
+
     <script src="{{ url_for('static', filename='js/upload.js') }}"></script>
 </body>
 </html>

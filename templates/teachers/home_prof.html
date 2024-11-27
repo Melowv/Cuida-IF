@@ -18,63 +18,64 @@
     {% include "components/smalldevices.html" %}
     <div class="content">
         {% include "components/sidebarprofessor.html" %}
-
-        <div class="situation">
-            <div class="title-view">
-                <h2>Escolha a Turma</h2>
-            </div>
-
-            <!-- Botões para turmas de Informática -->
-            <div class="classes">
-                <button class="classes-button" onclick="mostrarAlunos('1° A,Informática')">1° INFO A</button>
-                <button class="classes-button" onclick="mostrarAlunos('1° B,Informática')">1° INFO B</button>
-                <button class="classes-button" onclick="mostrarAlunos('2° A,Informática')">2° INFO A</button>
-                <button class="classes-button" onclick="mostrarAlunos('2° B,Informática')">2° INFO B</button>
-                <button class="classes-button" onclick="mostrarAlunos('3°,Informática')">3° INFO</button>
-            </div>
-
-            <!-- Listagem de alunos de Informática -->
-            <div class="classes-students">
-                <h3></h3>
-                <table>
-                    <thead>
-                        <tr class="d-flex justify-content-between title-header">
-                            <th>NOME</th>
-                            <th>PERFIL</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lista-alunos-informatica">
-                        <!-- Lista de alunos será carregada aqui -->
-                    </tbody>
-                </table>
-            </div>
-
-            <!-- Botões para turmas de Meio Ambiente -->
-            <div class="classes">
-                <button class="classes-button" onclick="mostrarAlunos('1° A,Meio Ambiente')">1° MA A</button>
-                <button class="classes-button" onclick="mostrarAlunos('1° B,Meio Ambiente')">1° MA B</button>
-                <button class="classes-button" onclick="mostrarAlunos('2° A,Meio Ambiente')">2° MA A</button>
-                <button class="classes-button" onclick="mostrarAlunos('2° B,Meio Ambiente')">2° MA B</button>
-                <button class="classes-button" onclick="mostrarAlunos('3°,Meio Ambiente')">3° MA</button>
-            </div>
-
-            <!-- Listagem de alunos de Meio Ambiente -->
-            <div class="classes-students">
-                <table>
-                    <thead>
-                        <tr class="d-flex justify-content-between title-header">
-                            <th>NOME</th>
-                            <th>PERFIL</th>
-                        </tr>
-                    </thead>
-                    <tbody id="lista-alunos-meio-ambiente">
-                        <!-- Lista de alunos será carregada aqui -->
-                    </tbody>
-                </table>
+        <div class="situation-limited">
+            <div class="situation">
+                <div class="title-view">
+                    <h2>Escolha a Turma</h2>
+                </div>
+    
+                <!-- Botões para turmas de Informática -->
+                <div class="classes">
+                    <button class="classes-button" onclick="mostrarAlunos('1° A,Informática')">1° INFO A</button>
+                    <button class="classes-button" onclick="mostrarAlunos('1° B,Informática')">1° INFO B</button>
+                    <button class="classes-button" onclick="mostrarAlunos('2° A,Informática')">2° INFO A</button>
+                    <button class="classes-button" onclick="mostrarAlunos('2° B,Informática')">2° INFO B</button>
+                    <button class="classes-button" onclick="mostrarAlunos('3°,Informática')">3° INFO</button>
+                </div>
+    
+                <!-- Listagem de alunos de Informática -->
+                <div class="classes-students">
+                    <h3></h3>
+                    <table>
+                        <thead>
+                            <tr class="d-flex justify-content-between title-header">
+                                <th>NOME</th>
+                                <th>PERFIL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-alunos-informatica">
+                            <!-- Lista de alunos será carregada aqui -->
+                        </tbody>
+                    </table>
+                </div>
+    
+                <!-- Botões para turmas de Meio Ambiente -->
+                <div class="classes">
+                    <button class="classes-button" onclick="mostrarAlunos('1° A,Meio Ambiente')">1° MA A</button>
+                    <button class="classes-button" onclick="mostrarAlunos('1° B,Meio Ambiente')">1° MA B</button>
+                    <button class="classes-button" onclick="mostrarAlunos('2° A,Meio Ambiente')">2° MA A</button>
+                    <button class="classes-button" onclick="mostrarAlunos('2° B,Meio Ambiente')">2° MA B</button>
+                    <button class="classes-button" onclick="mostrarAlunos('3°,Meio Ambiente')">3° MA</button>
+                </div>
+    
+                <!-- Listagem de alunos de Meio Ambiente -->
+                <div class="classes-students">
+                    <table>
+                        <thead>
+                            <tr class="d-flex justify-content-between title-header">
+                                <th>NOME</th>
+                                <th>PERFIL</th>
+                            </tr>
+                        </thead>
+                        <tbody id="lista-alunos-meio-ambiente">
+                            <!-- Lista de alunos será carregada aqui -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+        
         <div class="content-side"> <!-- Inicio Div Content Side -->
-
             <div class="reviews"> <!-- Inicio Div Reviews -->
                 <div class="reviews-header">
                     <i class="fa-solid fa-bell"></i>

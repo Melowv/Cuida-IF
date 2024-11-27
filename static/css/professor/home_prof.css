@@ -2,7 +2,7 @@
 
 .situation {
     padding: 1%;
-    width: 30vw;
+    width: 27vw;
 }
 
 .sidebar {
@@ -31,7 +31,8 @@
     border: none;
     outline: none;
     justify-content: space-around;
-    width: 80px;
+    max-width: 90px;
+    min-width: 50px;
     margin: 15px 2px;  
     padding: 10px 12px;      
 }
