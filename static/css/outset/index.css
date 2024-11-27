@@ -1,0 +1,236 @@
+/* Formatações Gerais */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+body, html {
+    height: 100vh;
+    background: linear-gradient(#ffffff, #CBB4F6) fixed;
+}
+
+/* Logo */
+
+.navbar-brand {
+    position: absolute;
+    top: 10vh;
+    left: 10vh;
+    animation: right 2s;
+}
+
+.navbar-brand img {
+    width: 5%;
+}
+
+/* Espaçamento da Tela e Formatações */
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.container h1 {
+   letter-spacing: 2px;
+   font-size: 36px;
+}
+
+/* Formatação Conteúdo da Tela */
+
+.content-screen {
+    background: #ffffff;
+    height: 50vh;
+    border-radius: 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    animation: right 2s;
+}
+
+/* Conteúdo Login */
+
+.login,
+.cadastre {
+    width: 50%;
+    text-align: center;
+    animation: login 2s;
+    margin: 5% auto;
+}
+
+/* Formatação dos Inputs */
+
+.login input,
+.cadastre input {
+    background: #d1d1d1;
+    border: none;
+    outline: none;
+    width: 75%;
+    padding: 2.5%;
+    border-radius: 10px;
+    margin-top: 15px;
+    letter-spacing: 2px;
+}
+
+/* Formatação do Botão*/
+
+.button {
+    margin-top: 5%;
+    border-radius: 10px;
+    padding: 2%;
+    width: 25%;
+    background: #A171FF;
+    border: none;
+}
+
+.button:hover {
+    background: #651ADF;
+    transition: all 2s ease-in-out;
+}
+
+/* Formatação de Registro */
+
+.register {
+    background: linear-gradient(to right, #A171FF, #651ADF);
+    width: 35%;
+    height: 100%;
+    border-radius: 40px; 
+    animation: left 2s;
+    display: flex;
+    align-items: center;
+}
+
+/* Formatação da Âncora de Link */
+
+.anchor {
+    background: #ffffff;
+    color: #A171FF;
+    border: none;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 10px 15px;
+    text-decoration: none;
+}
+
+.anchor:hover {
+    color: #651ADF;
+    background: #e6e6e6;
+    transition: 1s;
+}
+
+/* Animações */
+
+@keyframes login {
+    from {
+        transform: translateX(-5%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes left {
+    from {
+        transform: translateX(10%);
+    }
+    
+    to {
+        transform: translateX(0);
+    }
+}
+
+@keyframes right {
+    from {
+        transform: translateX(-10%);
+    }
+
+    to {
+        transform: translateX(0);
+    }
+}
+
+/* Responsividade */
+
+/* Small Devices */
+
+@media (max-width: 767.98px) {
+    .mobile-devices {
+        height: 100%;
+        display: flex !important;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 10%;
+    }
+
+    .mobile-devices h1 {
+        font-weight: 400;
+    }
+    
+    .container {
+        display: none;
+    }
+}
+
+/* Medium Devices */
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .content-screen {
+        width: 75vw;  
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1170px) {
+    .content-screen {
+        width: 65vw;
+    }
+}
+
+/* Large Devices */
+
+@media (min-width: 1171px) {
+    .content-screen {
+        width: 55vw;
+    }
+}
+
+/* Extra Large Devices */
+
+@media (min-width: 1300px) {
+    .content-screen {
+        width: 48vw;
+    }
+}
+
+@media (min-width: 1650px) {
+    .content-screen {
+        width: 40vw;
+    }
+}
+
+/* Height */
+
+@media (max-height: 768px) {
+    .content-screen {
+        height: 60vh;
+    }
+}
+
+@media (min-height: 1200px) {
+    .content-screen {
+        height: 40vh;
+    }
+}
+
+@media (min-height: 1500px) {
+    .content-screen {
+        height: 30vh;
+    }
+}
+
+@media (min-height: 2000px) {
+    .content-screen {
+        height: 20vh;
+    }
+}

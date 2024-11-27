@@ -1,0 +1,108 @@
+/* Formatações Gerais */
+
+.situation {
+    padding: 1%;
+    width: 27vw;
+}
+
+.sidebar {
+    width: 16vw !important;
+}
+
+.title-view h2 {
+    font-size: 18px;
+    text-align: center;
+    background-color: #9965FF;
+    padding: 10px 20px;
+    border-radius: 30px;
+}
+
+.classes {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.classes-button {
+    font-size: 12px;
+    background-color:#ffffff;
+    border-radius: 10px;
+    color:#9965FF;
+    border: none;
+    outline: none;
+    justify-content: space-around;
+    max-width: 90px;
+    min-width: 50px;
+    margin: 15px 2px;  
+    padding: 10px 12px;      
+}
+    
+.classes-button:hover {
+    background-color:#35068e;
+    color:#ffffff;
+    transition: 0.5s ease-in-out;
+}
+
+.classes-students {
+    background-color: #9965FF;
+    margin-left: 1%;
+    border-radius: 30px;
+    color: #ffffff;
+    width: 25vw;
+    height: 35%;
+    padding: 20px;
+    margin: 0;
+    overflow-y: auto;
+    scrollbar-width: thin;
+}
+
+table {
+    width: 100%;
+    color: #ffffff;
+    border-spacing: 0;
+    border-bottom: 0px solid #ffffff;
+    margin-top: -15px;
+}
+
+table th, table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px transparent;
+    margin-top: -5px;
+}
+
+table th {
+    font-size: 1em;
+    text-transform: uppercase;
+    margin-top: 0;
+    font-size: 12px;
+}
+
+table td {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+table td:last-child {
+    text-align: left;
+    cursor: pointer;
+}
+
+.title-header {
+    border-bottom: 1px solid #ffffff;
+}
+
+/* Configurações dos Containers */
+
+.reviews,
+.events {
+    width: 35vw;
+}
+
+.reviews-header h2 {
+    margin-left: 30%;
+}
+
+.events {
+    height: 55.5vh;
+}

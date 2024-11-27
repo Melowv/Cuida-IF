@@ -1,0 +1,9 @@
+.col-left {
+    margin-top: 19.5%;
+}
+
+.col-right {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}

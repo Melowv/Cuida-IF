@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/img/logo.png" type="image/x-icon">
+    <title>Cuida +IF</title>
+    <!-- Links do Css e do Bootstrap -->
+    <link rel="stylesheet" href="/static/css/outset/index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+<body>
+    <div class="mobile-devices" style="display: none;" >
+        <h1>Infelizmente ainda não há nada para celulares por Aqui!</h1>
+    </div>
+    
+    <div class="container"> <!-- Criando a estrutura de uma Div com o Container, ou seja irá preencher toda a área do body -->
+        <div class="navbar-brand"><img src="/static/img/logo.png" alt=""> Cuida +IF</div> <!-- Implementando mais uma Div com class Navbar-Brand (Classe de Logo do Bootstrap) -->
+        <div class="content-screen"> <!-- Content-Screen significa conteúdo da tela, ou seja, todos os conteúdos -->
+            <div class="login"> <!-- Aqui temos a Div Login que é a parte esquerda da Div Contenta-Screen, onde fica os conteúdos do Login -->
+                <h1>Login</h1> <!-- Título de Login -->
+
+                {% if mensagem %} <!-- Código python para chamar variável mensagem do flask -->
+                    <script> window.alert("{{ mensagem }}");</script>
+                {% endif %}
+                
+                <form method="POST"> <!-- Formulário de Login -->
+                    <input type="text" id="matricula" name="matricula" placeholder="Digite sua Matricula..." autocomplete="off" required="required">
+                    <input type="password" id="senha" name="senha" placeholder="Digite sua Senha..." autocomplete="off" required="required">
+                    <div class="mt-2">
+                        <a class="text-dark text-decoration-none" href="#">Esqueceu sua senha?</a>
+                    </div>
+                    <button class="button text-white" type="submit">Entrar</button>
+                </form> <!-- Fim Formulário -->
+            </div> <!-- Fim Div Login -->
+            
+            <div class="register"> <!-- Div responsável pela criação do background do bloco que redireciona para a página de cadastro -->
+                <div class="text-white text-center"> <!-- Configurações dos conteúdos de dentro do bloco do cadastro -->
+                    <h1 class="mb-4">Bem Vindo</h1>
+                    <p class="m-3 text-start">Não criou sua conta ainda? Registre-se abaixo!</p>
+                    <a class="anchor" href="{{ url_for('cadastro') }}">Criar Conta</a> <!-- O Url_For redireciona para a rota e função do Flask com o mesmo nome -->
+                </div> <!-- Fim Div Content-Register -->
+            </div>  <!-- Fim Div Register -->
+        </div> <!-- Fim Div Content-Screen -->
+    </div> <!-- Fim Div Container -->
+
+    <!-- Scripts do Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></head>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+</body>
