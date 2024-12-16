@@ -1,0 +1,29 @@
+.flex-container {
+    padding: 7vh;
+    align-items: start;
+    flex-direction: column;
+}
+
+.event-first,
+.event-second {
+    display: flex;
+    width: 100%;
+    justify-content: space-between; 
+}
+
+.event-box {
+    background: #9965FF;
+    border-radius: 3vh;
+    height: 35vh;
+    width: 13vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    margin-bottom: 5vh;
+}
+
+.icon {
+    cursor: pointer;
+    font-size: 10vh;
+}

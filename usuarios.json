@@ -2,7 +2,7 @@
     "alunos": [
         {
             "matricula": "202214610045",
-            "nome": "Davi Melo",
+            "nome": "Davi Melo cdfdfdf",
             "altura": "1.70",
             "peso": "60",
             "pressao": "120/80",
@@ -35,10 +35,10 @@
             "cidade": "Santa Rita",
             "cep": "58000-000",
             "bairro": "Tibiri",
-            "estado": "Paraíba",
+            "estado": "Parai­ba",
             "rua": "Rua Bessa",
             "genero": "masculino",
-            "foto_perfil": "Céub1ee7c5fec5d1883.jpg"
+            "foto_perfil": "CÃƒÆ’Ã‚Â©ub1ee7c5fec5d1883.jpg"
         },
         {
             "matricula": "12345",
@@ -126,7 +126,7 @@
             "pressao": "120/80",
             "plano_saude": "sim",
             "data_nascimento": "2008-08-04",
-            "turma": "1° A",
+            "turma": "2° A",
             "curso": "Informática",
             "cidade": "sla",
             "cep": "1234",
@@ -197,7 +197,7 @@
         {
             "matricula": "202014610001",
             "nome": "Ellen",
-            "email": "ellen.silva@exemplo.com",
+            "email": "ellen.f@exemplo.com",
             "data_nascimento": "2001-04-05",
             "senha": "1234",
             "genero": "feminino",

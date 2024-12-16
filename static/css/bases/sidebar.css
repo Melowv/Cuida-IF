@@ -132,3 +132,9 @@ body, html {
         display: none;
     }
 }
+
+@media (max-height: 868px) {
+    .sidebar {
+        min-height: 600px;
+    }
+}

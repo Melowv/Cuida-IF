@@ -1,22 +1,3 @@
-/* Container Principal */
-
-.limited-flex {
-    height: 100%;
-}
-
-.flex-container {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    box-sizing: border-box;
-    background-color: #8349F4;;
-    border-radius: 30px;
-    width: 64vw;
-    height: 100%;
-    min-height: 800px;
-    margin-left: 0.5vh;
-}
-
 /* Coluna Lateral */
 
 .col-left {
@@ -45,7 +26,7 @@
 
 .inserir-foto {
     margin: 1vh;
-    max-width: 250px;
+    max-width: 15vw;
     min-height: 200px;
     border-radius: 30px;
     background-color: #9965FF;
@@ -63,7 +44,7 @@
 .inserir-foto .foto img {
     margin: 2vh auto;
     margin-bottom: 1vh;
-    max-width: 10vw;
+    max-width: 11vw;
     max-height: 10vw;
     border-radius: 15px;
 }

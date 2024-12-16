@@ -82,13 +82,17 @@ body, html {
 }
 
 /* Tabela de IMC */
+.limited-section-table {
+    width: 100%;
+    height: 100%;
+}
 
 .section-table {
-    height: 30vh;
+    
     width: 100%;
     margin-top: 20px;
     padding: 5%;
-    background-color:#9965FF;
+    background-color: #9965FF;
     border-radius: 30px;
     text-align: center;
 }
@@ -138,7 +142,7 @@ body, html {
     min-width: 500px;
     min-height: 300px;
     height: 33vh;
-    line-height: 2;
+    line-height: 2.5;
     margin-bottom: 2%;
 }
 
@@ -220,3 +224,21 @@ body, html {
     margin: 0 15px;
 }
 
+@media (max-height: 868px) {
+    .situation {
+        min-height: 600px;
+    }
+    .reviews {
+        min-height: 200px;
+    }
+    .buttons {
+        margin-top: 0;
+    }
+    .events {
+        min-height: 400px;
+    }
+    
+    .section-table {
+        height: 15vh;
+    }
+}
